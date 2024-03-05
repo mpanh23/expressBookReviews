@@ -29,6 +29,7 @@ const authenticatedUser = (username,password)=>{ //returns boolean
  }
 }
 
+// Task 7: Log in as a registered user
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
@@ -49,14 +50,10 @@ regd_users.post("/login", (req,res) => {
 } else {
     return res.status(208).json({message: "Invalid Login. Check username and password"})
 }
-
-  
-  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
-// Add a book review
+// Task 8: Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
   const isbn = req.params.isbn;
   let book = books[isbn]
   if (book) { //check book exist
@@ -66,15 +63,24 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     }
     books[review] = book;
     res.send(`The review for the book with ISBN ${isbn} has been updated.`); 
+  } else {
+    return res.status(404).json({message: `ISBN ${isbn} not found`});
   }
-  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
-//Delete a book review
+// Task 9: Delete a book review
 regd_users.delete("/auth/review/:isbn", (req, res) => {
-  
-  return res.status(300).json({message: "Yet to be implemented"});
-});  
+    const isbn = req.params.isbn;
+    const username = req.session.authorization.username;
+    if (books[isbn]) {
+      let book = books[isbn];
+      delete book.reviews[username];
+      return res.status(200).send(`The review for the ISBN ${isbn} posted by the user ${username} has been deleted.`);
+    }
+    else {
+      return res.status(404).json({message: `ISBN ${isbn} not found`});
+    }
+  });  
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
