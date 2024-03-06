@@ -77,8 +77,6 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
   const author = req.params.author;
-  //let book = books[author]
-  //res.send(book)
   getBooks()
     .then((bookEntries) => Object.values(bookEntries))
     .then((books) => books.filter((book) => book.author === author))
