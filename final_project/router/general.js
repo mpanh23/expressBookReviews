@@ -40,7 +40,7 @@ const getBooks = () => {
     });
 }
 
-// Task 1: Get the book list available in the shop
+// Task 1 & 10,12,13: Get the book list available in the shop
 public_users.get('/',function (req, res) {
     getBooks(books)
     .then(
@@ -51,7 +51,7 @@ public_users.get('/',function (req, res) {
   
 });
 
-// Const getByISBN
+// Task 2 & 11: Const getByISBN
 const getByISBN = (isbn) => {
     return new Promise((resolve, reject) => {
         let isbnNum = parseInt(isbn);
