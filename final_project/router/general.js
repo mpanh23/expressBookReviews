@@ -32,7 +32,7 @@ public_users.post("/register", (req,res) => {
   return res.status(404).json({message: "Unable to register user."});
 });
 
-// Task 1 & Task 10: Get the book list available in the shop
+// Task 1 & Task 10, 12, 13: Get the book list available in the shop
 // const getBooks
 const getBooks = () => {
     return new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ const getBooks = () => {
     });
 }
 
-// Task 1 & 10,12,13: Get the book list available in the shop
+// Task 1 & 10: Get the book list available in the shop
 public_users.get('/',function (req, res) {
     getBooks(books)
     .then(
